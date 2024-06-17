@@ -1,0 +1,48 @@
+import time
+
+def calculate_typing_speed(text, time_taken):
+    words = text.split()
+    num_words = len(words)
+    minutes = time_taken / 60
+    wpm = num_words / minutes if minutes > 0 else 0
+    return wpm
+
+def calculate_accuracy(original_text, typed_text):
+    original_words = original_text.split()
+    typed_words = typed_text.split()
+    
+    correct_words = 0
+    total_words = len(original_words)
+    
+    for original_word, typed_word in zip(original_words, typed_words):
+        if original_word == typed_word:
+            correct_words += 1
+    
+    accuracy = (correct_words / total_words) * 100 if total_words > 0 else 0
+    return accuracy
+
+def main():
+    print("Welcome to Typing Speed Calculator!")
+
+    passage = """In a green meadow, a small bird chirped happily. It fluttered from flower to flower, savoring sweet nectar. Suddenly, a gentle breeze lifted it high. The bird soared, feeling free as it embraced the vast blue sky. Below, the meadow whispered its secrets to the wind."""
+
+    print("Type the following passage:")
+    print(passage)
+    input("Press Enter when you are ready to start typing...")
+    
+    start_time = time.time()
+
+    typed_text = input("Start typing here: ")
+    text= len(typed_text)
+    if text>0:
+        end_time = time.time()
+        time_taken = end_time - start_time
+        typing_speed = calculate_typing_speed(passage, time_taken)
+        accuracy = calculate_accuracy(passage, typed_text)
+        print(f"\nYour typing speed is: {typing_speed:.2f} words per minute (WPM)")
+        print(f"Your typing accuracy is: {accuracy:.2f}%")
+    else:
+        print("No text entered. Please try again.")
+
+if __name__ == "__main__":
+    main()
